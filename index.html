@@ -39,83 +39,52 @@
     h1::after {
       content: " ☀️";
     }
-    .btn-app {
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .btn {
       display: inline-block;
-      background: #0b6e4f;
-      color: white;
-      font-size: 1.5rem;
-      font-weight: 600;
       padding: 18px 48px;
-      border: none;
       border-radius: 60px;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(11,110,79,0.35);
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
       transition: all 0.2s ease;
-      margin-bottom: 25px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border: none;
+      cursor: pointer;
       width: 100%;
     }
-    .btn-app:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 32px rgba(11,110,79,0.45);
+    .btn-web {
+      background: #2c3e66;
     }
-    .btn-app:active {
+    .btn-web:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(44,62,102,0.4);
+    }
+    .btn-web:active {
       transform: scale(0.97);
     }
-    .prompt-box {
-      background: #f0f4fc;
-      border-radius: 20px;
-      padding: 20px 25px;
-      text-align: left;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #1e2b3c;
-      border: 1px solid #d0dbe8;
-      margin: 15px 0 20px;
-      max-height: 200px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .prompt-box strong {
-      color: #0b6e4f;
-    }
     .hint {
-      font-size: 0.9rem;
+      margin-top: 25px;
+      font-size: 0.95rem;
       color: #3d5068;
       opacity: 0.8;
     }
     .hint span {
       background: #eef3f9;
-      padding: 2px 10px;
+      padding: 2px 12px;
       border-radius: 30px;
       font-weight: 500;
-    }
-    .toast {
-      visibility: hidden;
-      min-width: 250px;
-      background: #1a2634;
-      color: white;
-      text-align: center;
-      border-radius: 40px;
-      padding: 14px 20px;
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: visibility 0.3s, opacity 0.3s;
-      opacity: 0;
-      z-index: 999;
-    }
-    .toast.show {
-      visibility: visible;
-      opacity: 1;
     }
     @media (max-width: 550px) {
       .card { padding: 30px 20px; }
       h1 { font-size: 1.7rem; }
-      .btn-app { font-size: 1.2rem; padding: 14px 24px; }
+      .btn { font-size: 1.1rem; padding: 14px 24px; }
     }
   </style>
 </head>
@@ -124,98 +93,21 @@
 <div class="card">
   <h1>Was sollen wir Sonntag Nachmittag machen</h1>
 
-  <!-- Button: kopiert Prompt & öffnet App -->
-  <button class="btn-app" id="openAppBtn">
-    📱 GPT in der App fragen
-  </button>
-
-  <!-- Anzeige des integrierten Prompts -->
-  <div class="prompt-box" id="promptDisplay">
-    <strong>📋 Dein optimierter Prompt (wird automatisch kopiert):</strong><br><br>
-    <span id="promptText">
-Du bist mein persönlicher Freizeit-Coach für den Sonntagnachmittag (Zeitraum 14 bis 18 Uhr). Stelle mir eine abwechslungsreiche Auswahl an Aktivitäten zusammen, aufgeteilt in folgende Kategorien:
-
-1. Aktiv & Draußen (Bewegung, Natur, frische Luft)
-2. Gemütlich & Entspannt (Café, Lesen, Wellness, Zuhause)
-3. Kreativ & Kulturell (Museum, Basteln, Musik, Fotografie)
-4. Eine völlig unerwartete, ausgefallene Idee
-
-Gib mir zu jedem Vorschlag:
-- Eine bildhafte, kurze Beschreibung, was genau wir tun.
-- Den ungefähren Zeitaufwand.
-- Eine grobe Kosten-Einschätzung (günstig, mittel, teuer).
-- Eine Empfehlung, ob sich die Aktivität besser allein, zu zweit, mit der Familie oder in einer Gruppe lohnt.
-
-Berücksichtige in deiner Antwort, dass wir gerade Sommer haben. Frage mich am Ende, ob ich eher Action oder Ruhe suche und wo ich wohne, damit du beim nächsten Mal die Vorschläge noch persönlicher auf mich zuschneiden kannst.
-    </span>
+  <div class="btn-group">
+    <!-- Button öffnet ChatGPT Web mit automatisch eingefügtem Prompt -->
+    <a href="https://chat.openai.com/?q=Du%20bist%20mein%20pers%C3%B6nlicher%20Freizeit-Coach%20f%C3%BCr%20den%20Sonntagnachmittag%20%28Zeitraum%2014%20bis%2018%20Uhr%29.%20Stelle%20mir%20eine%20abwechslungsreiche%20Auswahl%20an%20Aktivit%C3%A4ten%20zusammen%2C%20aufgeteilt%20in%20folgende%20Kategorien%3A%0A%0A1.%20Aktiv%20%26%20Drau%C3%9Fen%20%28Bewegung%2C%20Natur%2C%20frische%20Luft%29%0A2.%20Gem%C3%BCtlich%20%26%20Entspannt%20%28Caf%C3%A9%2C%20Lesen%2C%20Wellness%2C%20Zuhause%29%0A3.%20Kreativ%20%26%20Kulturell%20%28Museum%2C%20Basteln%2C%20Musik%2C%20Fotografie%29%0A4.%20Eine%20v%C3%B6llig%20unerwartete%2C%20ausgefallene%20Idee%0A%0AGib%20mir%20zu%20jedem%20Vorschlag%3A%0A-%20Eine%20bildhafte%2C%20kurze%20Beschreibung%2C%20was%20genau%20wir%20tun.%0A-%20Den%20ungef%C3%A4hren%20Zeitaufwand.%0A-%20Eine%20grobe%20Kosten-Einsch%C3%A4tzung%20%28g%C3%BCnstig%2C%20mittel%2C%20teuer%29.%0A-%20Eine%20Empfehlung%2C%20ob%20sich%20die%20Aktivit%C3%A4t%20besser%20allein%2C%20zu%20zweit%2C%20mit%20der%20Familie%20oder%20in%20einer%20Gruppe%20lohnt.%0A%0ABer%C3%BCcksichtige%20in%20deiner%20Antwort%2C%20dass%20wir%20gerade%20%5BHier%20Jahreszeit%2FWetter%20einf%C3%BCgen%2C%20z.B.%20%27im%20Sommer%27%20oder%20%27bei%20Regen%27%5D%20haben.%20Frage%20mich%20am%20Ende%2C%20ob%20ich%20eher%20Action%20oder%20Ruhe%20suche%20und%20wo%20ich%20wohne%2C%20damit%20du%20beim%20n%C3%A4chsten%20Mal%20die%20Vorschl%C3%A4ge%20noch%20pers%C3%B6nlicher%20auf%20mich%20zuschneiden%20kannst."
+       target="_blank"
+       rel="noopener noreferrer"
+       class="btn btn-web">
+      🌐 GPT im Browser fragen
+    </a>
   </div>
 
   <p class="hint">
-    🔹 <span>Klick auf den Button</span> → Prompt kopiert & App geöffnet.<br>
-    🔹 Dann einfach im Chat-Feld <span>Einfügen (Strg+V / Cmd+V)</span> – fertig!
+    🔹 <span>Klick öffnet ChatGPT Web</span> – der Prompt steht sofort im Chat-Feld bereit.<br>
+    🔹 Du musst nur noch <span>Absenden</span> drücken.
   </p>
 </div>
-
-<!-- Toast-Benachrichtigung -->
-<div id="toast" class="toast">✅ Prompt wurde kopiert!</div>
-
-<script>
-  (function() {
-    const button = document.getElementById('openAppBtn');
-    const toast = document.getElementById('toast');
-    const promptElement = document.getElementById('promptText');
-    const promptText = promptElement.textContent.trim();
-
-    // Deep-Link für die App (funktioniert nur zum Öffnen, Prompt wird ignoriert)
-    const appDeepLink = 'chatgpt://chat?q=' + encodeURIComponent(promptText);
-
-    function copyAndOpen() {
-      // 1. Prompt in die Zwischenablage kopieren
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(promptText)
-          .then(() => {
-            showToast('✅ Prompt wurde kopiert!');
-          })
-          .catch(() => {
-            fallbackCopy(promptText);
-          });
-      } else {
-        fallbackCopy(promptText);
-      }
-
-      // 2. App öffnen (Deep Link)
-      window.open(appDeepLink, '_blank');
-    }
-
-    // Fallback für alte Browser
-    function fallbackCopy(text) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand('copy');
-        showToast('✅ Prompt wurde kopiert!');
-      } catch (err) {
-        showToast('❌ Kopieren fehlgeschlagen – bitte manuell markieren und kopieren.');
-      }
-      document.body.removeChild(textarea);
-    }
-
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toast._timeout);
-      toast._timeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-    button.addEventListener('click', copyAndOpen);
-  })();
-</script>
 
 </body>
 </html>
