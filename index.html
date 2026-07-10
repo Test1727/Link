@@ -84,17 +84,16 @@
 <div class="card">
   <h1>Was sollen wir Sonntag Nachmittag machen</h1>
 
-  <button class="btn" id="openGptBtn">🌐 GPT im Browser fragen</button>
+  <button class="btn" id="openGptBtn">🤖 GPT fragen</button>
 
   <p class="hint">
-    🔹 <span>Klick öffnet ChatGPT Web</span> – der Prompt steht sofort im Chat-Feld.<br>
-    🔹 Du musst nur noch <span>Absenden</span> drücken.
+    🔹 <span>Klick öffnet ChatGPT</span> – automatisch in der App (mobil) oder im Browser (Desktop).<br>
+    🔹 Der Prompt steht sofort im Chat-Feld – du musst nur <span>Absenden</span> drücken.
   </p>
 </div>
 
 <script>
   (function() {
-    // ===== PROMPT – hier kannst du alles beliebig ändern =====
     const PROMPT = `Du bist mein persönlicher Freizeit-Coach für den Sonntagnachmittag (Zeitraum 14 bis 18 Uhr). Stelle mir eine abwechslungsreiche Auswahl an Aktivitäten zusammen, aufgeteilt in folgende Kategorien:
 
 1. Aktiv & Draußen (Bewegung, Natur, frische Luft)
@@ -108,11 +107,8 @@ Gib mir zu jedem Vorschlag:
 - Eine grobe Kosten-Einschätzung (günstig, mittel, teuer).
 - Eine Empfehlung, ob sich die Aktivität besser allein, zu zweit, mit der Familie oder in einer Gruppe lohnt.
 
-Berücksichtige in deiner Antwort, dass wir gerade Sommer haben und Temperaturen um die 30 Grad. Frage mich am Ende, ob ich eher Action oder Ruhe suche und wo ich wohne, damit du beim nächsten Mal die Vorschläge noch persönlicher auf mich zuschneiden kannst.`;
+Berücksichtige in deiner Antwort, dass wir gerade Sommer haben und Temperaturen um die 30 Grad. Wir suchen eher ruhige, entspannte Aktivitäten, keine Action. Wir wohnen in Essen. Gib mir konkrete Vorschläge, die in Essen oder Umgebung umsetzbar sind.`;
 
-    // (Die Anzeige der Textbox wurde entfernt – daher keine Zuweisung mehr nötig)
-
-    // Button – öffnet ChatGPT mit kodiertem Prompt
     document.getElementById('openGptBtn').addEventListener('click', function() {
       const encoded = encodeURIComponent(PROMPT);
       window.open(`https://chat.openai.com/?q=${encoded}`, '_blank');
@@ -122,8 +118,5 @@ Berücksichtige in deiner Antwort, dass wir gerade Sommer haben und Temperaturen
 
 </body>
 </html>
-
-
-
 
 
