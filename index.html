@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonntag Nachmittag</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #f5f9ff 0%, #e3edfa 100%);
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 50px 60px;
+      box-shadow: 0 20px 60px rgba(0, 20, 40, 0.15);
+      text-align: center;
+      max-width: 650px;
+      width: 100%;
+      transition: transform 0.2s ease;
+    }
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #1a2634;
+      letter-spacing: -0.5px;
+      margin-bottom: 40px;
+      line-height: 1.2;
+    }
+    h1::after {
+      content: " ☀️";
+      font-size: 2.2rem;
+    }
+    .btn-wrapper {
+      display: inline-block;
+      border-radius: 60px;
+      background: #0b6e4f;
+      box-shadow: 0 8px 24px rgba(11, 110, 79, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-wrapper:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 32px rgba(11, 110, 79, 0.45);
+    }
+    .btn-wrapper:active {
+      transform: scale(0.97);
+    }
+    button {
+      background: transparent;
+      border: none;
+      padding: 18px 48px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      border-radius: 60px;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn-wrapper:hover button {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    a {
+      text-decoration: none;
+    }
+    .hint {
+      margin-top: 30px;
+      font-size: 0.95rem;
+      color: #3d5068;
+      opacity: 0.7;
+    }
+    @media (max-width: 500px) {
+      .card {
+        padding: 30px 20px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      button {
+        font-size: 1.2rem;
+        padding: 14px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Was sollen wir Sonntag Nachmittag machen</h1>
+
+  <a href="https://chat.openai.com/chat?q=Gebe%20Informationen%20aus%20zu%20einer%20sch%C3%B6nen%20Sonntag-Nachmittag%20Besch%C3%A4ftigung"
+     target="_blank"
+     rel="noopener noreferrer">
+    <div class="btn-wrapper">
+      <button>GPT fragen</button>
+    </div>
+  </a>
+
+  <p class="hint">🔗 Öffnet ChatGPT mit deinem Wunsch-Prompt</p>
+</div>
+
+</body>
+</html>
