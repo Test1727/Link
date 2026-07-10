@@ -61,24 +61,6 @@
     .btn:active {
       transform: scale(0.97);
     }
-    .prompt-box {
-      background: #f0f4fc;
-      border-radius: 20px;
-      padding: 20px 25px;
-      text-align: left;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #1e2b3c;
-      border: 1px solid #d0dbe8;
-      margin: 15px 0 20px;
-      max-height: 200px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .prompt-box strong {
-      color: #2c3e66;
-    }
     .hint {
       font-size: 0.9rem;
       color: #3d5068;
@@ -104,10 +86,7 @@
 
   <button class="btn" id="openGptBtn">🌐 GPT im Browser fragen</button>
 
-  <div class="prompt-box">
-    <strong>📋 Dein Prompt (wird automatisch übertragen):</strong><br><br>
-    <span id="promptDisplay"></span>
-  </div>
+  <!-- Textbox wurde entfernt – kein <div class="prompt-box"> mehr -->
 
   <p class="hint">
     🔹 <span>Klick öffnet ChatGPT Web</span> – der Prompt steht sofort im Chat-Feld.<br>
@@ -133,8 +112,8 @@ Gib mir zu jedem Vorschlag:
 
 Berücksichtige in deiner Antwort, dass wir gerade Sommer haben und Temperaturen um die 30 Grad. Frage mich am Ende, ob ich eher Action oder Ruhe suche und wo ich wohne, damit du beim nächsten Mal die Vorschläge noch persönlicher auf mich zuschneiden kannst.`;
 
-    // Anzeige im Textfeld
-    document.getElementById('promptDisplay').textContent = PROMPT;
+    // Die folgende Zeile wurde auskommentiert, weil das Element #promptDisplay nicht mehr existiert:
+    // document.getElementById('promptDisplay').textContent = PROMPT;
 
     // Button – öffnet ChatGPT mit kodiertem Prompt
     document.getElementById('openGptBtn').addEventListener('click', function() {
@@ -146,6 +125,7 @@ Berücksichtige in deiner Antwort, dass wir gerade Sommer haben und Temperaturen
 
 </body>
 </html>
+
 
 
 
