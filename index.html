@@ -39,39 +39,48 @@
     h1::after {
       content: " ☀️";
     }
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 10px;
-    }
     .btn {
       display: inline-block;
-      padding: 18px 48px;
-      border-radius: 60px;
+      background: #2c3e66;
+      color: white;
       font-size: 1.4rem;
       font-weight: 600;
-      text-decoration: none;
-      color: white;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      padding: 18px 48px;
       border: none;
+      border-radius: 60px;
       cursor: pointer;
+      box-shadow: 0 8px 24px rgba(44,62,102,0.35);
+      transition: all 0.2s ease;
       width: 100%;
+      margin-bottom: 20px;
     }
-    .btn-web {
-      background: #2c3e66;
-    }
-    .btn-web:hover {
+    .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 14px 32px rgba(44,62,102,0.4);
+      box-shadow: 0 14px 32px rgba(44,62,102,0.45);
     }
-    .btn-web:active {
+    .btn:active {
       transform: scale(0.97);
     }
-    .hint {
-      margin-top: 25px;
+    .prompt-box {
+      background: #f0f4fc;
+      border-radius: 20px;
+      padding: 20px 25px;
+      text-align: left;
       font-size: 0.95rem;
+      line-height: 1.6;
+      color: #1e2b3c;
+      border: 1px solid #d0dbe8;
+      margin: 15px 0 20px;
+      max-height: 200px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .prompt-box strong {
+      color: #2c3e66;
+    }
+    .hint {
+      font-size: 0.9rem;
       color: #3d5068;
       opacity: 0.8;
     }
@@ -93,21 +102,47 @@
 <div class="card">
   <h1>Was sollen wir Sonntag Nachmittag machen</h1>
 
-  <div class="btn-group">
-    <!-- Button öffnet ChatGPT Web mit automatisch eingefügtem Prompt -->
-    <a href="https://chat.openai.com/?q=Du%20bist%20mein%20pers%C3%B6nlicher%20Freizeit-Coach%20f%C3%BCr%20den%20Sonntagnachmittag%20%28Zeitraum%2014%20bis%2018%20Uhr%29.%20Stelle%20mir%20eine%20abwechslungsreiche%20Auswahl%20an%20Aktivit%C3%A4ten%20zusammen%2C%20aufgeteilt%20in%20folgende%20Kategorien%3A%0A%0A1.%20Aktiv%20%26%20Drau%C3%9Fen%20%28Bewegung%2C%20Natur%2C%20frische%20Luft%29%0A2.%20Gem%C3%BCtlich%20%26%20Entspannt%20%28Caf%C3%A9%2C%20Lesen%2C%20Wellness%2C%20Zuhause%29%0A3.%20Kreativ%20%26%20Kulturell%20%28Museum%2C%20Basteln%2C%20Musik%2C%20Fotografie%29%0A4.%20Eine%20v%C3%B6llig%20unerwartete%2C%20ausgefallene%20Idee%0A%0AGib%20mir%20zu%20jedem%20Vorschlag%3A%0A-%20Eine%20bildhafte%2C%20kurze%20Beschreibung%2C%20was%20genau%20wir%20tun.%0A-%20Den%20ungef%C3%A4hren%20Zeitaufwand.%0A-%20Eine%20grobe%20Kosten-Einsch%C3%A4tzung%20%28g%C3%BCnstig%2C%20mittel%2C%20teuer%29.%0A-%20Eine%20Empfehlung%2C%20ob%20sich%20die%20Aktivit%C3%A4t%20besser%20allein%2C%20zu%20zweit%2C%20mit%20der%20Familie%20oder%20in%20einer%20Gruppe%20lohnt.%0A%0ABer%C3%BCcksichtige%20in%20deiner%20Antwort%2C%20dass%20wir%20gerade%20%5BHier%20Jahreszeit%2FWetter%20einf%C3%BCgen%2C%20z.B.%20%27im%20Sommer%27%20oder%20%27bei%20Regen%27%5D%20haben.%20Frage%20mich%20am%20Ende%2C%20ob%20ich%20eher%20Action%20oder%20Ruhe%20suche%20und%20wo%20ich%20wohne%2C%20damit%20du%20beim%20n%C3%A4chsten%20Mal%20die%20Vorschl%C3%A4ge%20noch%20pers%C3%B6nlicher%20auf%20mich%20zuschneiden%20kannst."
-       target="_blank"
-       rel="noopener noreferrer"
-       class="btn btn-web">
-      🌐 GPT im Browser fragen
-    </a>
+  <button class="btn" id="openGptBtn">🌐 GPT im Browser fragen</button>
+
+  <div class="prompt-box">
+    <strong>📋 Dein Prompt (wird automatisch übertragen):</strong><br><br>
+    <span id="promptDisplay"></span>
   </div>
 
   <p class="hint">
-    🔹 <span>Klick öffnet ChatGPT Web</span> – der Prompt steht sofort im Chat-Feld bereit.<br>
+    🔹 <span>Klick öffnet ChatGPT Web</span> – der Prompt steht sofort im Chat-Feld.<br>
     🔹 Du musst nur noch <span>Absenden</span> drücken.
   </p>
 </div>
+
+<script>
+  (function() {
+    // ===== PROMPT – hier kannst du alles beliebig ändern =====
+    const PROMPT = `Du bist mein persönlicher Freizeit-Coach für den Sonntagnachmittag (Zeitraum 14 bis 18 Uhr). Stelle mir eine abwechslungsreiche Auswahl an Aktivitäten zusammen, aufgeteilt in folgende Kategorien:
+
+1. Aktiv & Draußen (Bewegung, Natur, frische Luft)
+2. Gemütlich & Entspannt (Café, Lesen, Wellness, Zuhause)
+3. Kreativ & Kulturell (Museum, Basteln, Musik, Fotografie)
+4. Eine völlig unerwartete, ausgefallene Idee
+
+Gib mir zu jedem Vorschlag:
+- Eine bildhafte, kurze Beschreibung, was genau wir tun.
+- Den ungefähren Zeitaufwand.
+- Eine grobe Kosten-Einschätzung (günstig, mittel, teuer).
+- Eine Empfehlung, ob sich die Aktivität besser allein, zu zweit, mit der Familie oder in einer Gruppe lohnt.
+
+Berücksichtige in deiner Antwort, dass wir gerade Sommer haben und Temperaturen um die 30 Grad. Frage mich am Ende, ob ich eher Action oder Ruhe suche und wo ich wohne, damit du beim nächsten Mal die Vorschläge noch persönlicher auf mich zuschneiden kannst.`;
+
+    // Anzeige im Textfeld
+    document.getElementById('promptDisplay').textContent = PROMPT;
+
+    // Button – öffnet ChatGPT mit kodiertem Prompt
+    document.getElementById('openGptBtn').addEventListener('click', function() {
+      const encoded = encodeURIComponent(PROMPT);
+      window.open(`https://chat.openai.com/?q=${encoded}`, '_blank');
+    });
+  })();
+</script>
 
 </body>
 </html>
